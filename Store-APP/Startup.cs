@@ -10,6 +10,9 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Store_API.Data;
+using Store_APP.Services.Categories;
+using Store_APP.Services.Orders;
+using Store_APP.Services.Products;
 using Store_Shared.Models;
 using System;
 using System.Collections.Generic;
@@ -30,15 +33,17 @@ namespace Store_APP
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            //services.AddIdentity<ApplicationUser, IdentityRole>()
-            //   .AddEntityFrameworkStores<AppDbContext>();
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+               .AddEntityFrameworkStores<AppDbContext>();
 
 
-            ////!! Add DBContext ===>
-            //services.AddDbContext<AppDbContext>(option =>
-            //    option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
-            //);
-
+            //!! Add DBContext ===>
+            services.AddDbContext<AppDbContext>(option =>
+                option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
+            );
+            services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IOrderService, OrderService>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
