@@ -10,7 +10,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Store_API.Data;
-using Store_APP.Services.Categories;
+//using Store_APP.Services.Categories;
 using Store_APP.Services.Orders;
 using Store_APP.Services.Products;
 using Store_Shared.Models;
@@ -18,6 +18,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Store_API.Services.Categories;
 
 namespace Store_APP
 {

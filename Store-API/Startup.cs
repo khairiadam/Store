@@ -22,6 +22,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+//using Store_API.Services.Categories;
 
 namespace Store_API
 {
@@ -54,6 +55,7 @@ namespace Store_API
             //!! _ DependencyInjection _ ===>
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IUserService, UserService>();
+            
 
 
 
