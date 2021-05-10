@@ -1,3 +1,4 @@
+using Auth_API.Services.Users;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -10,6 +11,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Store_API.Data;
+using Store_API.Services.Auth;
 using Store_APP.Services.Categories;
 using Store_APP.Services.Orders;
 using Store_APP.Services.Products;
@@ -17,6 +19,7 @@ using Store_Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace Store_APP
@@ -41,9 +44,18 @@ namespace Store_APP
             services.AddDbContext<AppDbContext>(option =>
                 option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
             );
+
+
+            ////!! _ DependencyInjection _ ===>
+            //services.AddScoped<IAuthService, AuthService>();
+            //services.AddScoped<IUserService, UserService>();
+
+            // services.AddAutoMapper(Assembly.GetExecutingAssembly());
+
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IOrderService, OrderService>();
+
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
