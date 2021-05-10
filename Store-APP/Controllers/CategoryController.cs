@@ -1,12 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using Store_APP.Services.Categories;
-using Store_Shared.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
+using Store_API.Services.Categories;
+using Store_Shared.Models;
 
 namespace Store_APP.Controllers
 {
@@ -35,33 +32,35 @@ namespace Store_APP.Controllers
         }
 
         [HttpPost("AddCategory")]
-        public async Task<IActionResult> AddCategories(Category category)
+        public async Task<IActionResult> AddCategories([FromForm] Category category, List<IFormFile> image)
         {
+
             if (!ModelState.IsValid)
             {
                 return BadRequest();
             }
 
-            await _category.Post(category);
-            return NoContent();
+
+            await _category.Post(category, image);
+            return Ok(category);
         }
 
-        [HttpDelete("DeleteCategory/{id}")]
+        [HttpDelete("DeleteCategory")]
         public async Task<IActionResult> DeleteCategory(string id)
         {
             await _category.Delete(id);
             return Ok();
         }
 
-        [HttpPut("UpdateCategory/{id}")]
-        public async Task<IActionResult> Edit(string id, Category category)
+        [HttpPut("UpdateCategory")]
+        public async Task<IActionResult> Edit(string id, [FromForm] Category category, List<IFormFile> image)
         {
             if (id != category.Id)
             {
                 return BadRequest();
             }
 
-            await _category.Put(category);
+            await _category.Put(category, image);
             return Ok(category);
         }
     }

@@ -1,36 +1,36 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Store_APP.Services.Products;
 using Store_Shared.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
-namespace StoreBlzr.Server.Controllers
+namespace Store_APP.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
     public class ProductsController : ControllerBase
     {
-        private readonly IProductService _productService;
+    
 
-        public ProductsController(IProductService productService)
+
+        private readonly IProductService _iProductService;
+
+        public ProductsController(IProductService iProductService)
         {
-            _productService = productService;
+            _iProductService = iProductService;
         }
 
 
-
-
         [HttpGet("products")]
-        public async Task<IEnumerable<Product>> Get()
+        public async Task<IActionResult> Get()
         {
 
 
-            return await _productService.GetProducts();
+            return Ok(await _iProductService.GetAll());
 
 
 
@@ -40,29 +40,37 @@ namespace StoreBlzr.Server.Controllers
         [HttpGet("GetProduct/{Id}")]
         public async Task<IActionResult> Getproduct(string id)
         {
+            var result = await _iProductService.Get(id);
 
-            if (id == null)
+            if (result == null)
             {
-                BadRequest(" Product Doesn't exist ");
+                return NotFound();
             }
 
-            return Ok(await _productService.Product(id));
+
+            return Ok(result);
 
 
 
         }
 
 
-        [HttpPost("newProduct")]
+        [HttpPost("Post")]
 
-        public async Task<IActionResult> CreateProduct([FromBody] Product model)
+        public async Task<IActionResult> Post([FromForm] Product model, List<IFormFile> image)
         {
             if (!ModelState.IsValid)
             {
-                return BadRequest("Something went Wrong");
+                return BadRequest("something went wrong");
             }
 
-            await _productService.CreateProduct(model);
+
+
+
+
+
+            await _iProductService.Post(model, image);
+
 
             return Ok(model);
 
@@ -71,32 +79,47 @@ namespace StoreBlzr.Server.Controllers
         }
 
         [HttpDelete("Delete/{Id}")]
-        public async Task<IActionResult> DeleteProduct(string Id)
+        public async Task<IActionResult> DeleteProduct(string id)
         {
-            var result = await _productService.DeleteProduct(Id);
-            
 
-            return Ok(result);
+            if (ModelState.IsValid)
+            {
+                await _iProductService.Delete(id);
+            }
+
+
+            else
+            {
+                return BadRequest();
+
+            }
+
+
+
+            return NoContent();
+
+
+
 
 
         }
 
 
-        [HttpPut("update/{Id}")]
-        public async Task<IActionResult> Update(string Id, Product product)
+
+
+
+
+        [HttpPut("update/{id}")]
+        public async Task<IActionResult> Put(string id, Product product)
         {
+            if (id != product.Id)
+            {
+                return BadRequest();
+            }
 
-
-         
-
-            var result = await _productService.UpdateProduct(Id, product);
-            return Ok(result);
-
-
-
-
+            await _iProductService.Update(product);
+            return Ok(product);
         }
-
 
     }
 }

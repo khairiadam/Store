@@ -1,10 +1,14 @@
+﻿using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Store_API.Data;
 using Store_Shared.Models;
 
-namespace Store_APP.Services.Categories
+namespace Store_API.Services.Categories
 {
     public class CategoryService : ICategoryService
     {
@@ -30,20 +34,57 @@ namespace Store_APP.Services.Categories
         public async Task<List<Category>> GetAll()
         {
             return await _db.Categories.ToListAsync();
+            //var getItems = (Category)_db.Categories.OrderBy(i => i.Id);
+            ////var getItems = await _db.Categories.ToListAsync();
+            //string img = Convert.ToBase64String(getItems.Image);
+            //string imageDataURL = string.Format("data:image/jpg;base64,{0}", img);
+            ////var results = new Category()
+            ////{
+            ////    Id = getItems.Id,
+            ////    Description = getItems.Description,
+            ////    Name = getItems.Name,
+            ////    Image = imageDataURL;
+            ////}
+            //return imageDataURL.ToList();
         }
 
-        public async Task<Category> Post(Category category)
+        public async Task<Category> Post(Category category, List<IFormFile> image)
         {
-            _db.Categories.Add(category);
-            await _db.SaveChangesAsync();
+            foreach (var file in image)
+            {
+                MemoryStream ms = new();
+                await file.CopyToAsync(ms);
+                category.Image = ms.ToArray();
+                _db.Categories.Add(category);
+                await _db.SaveChangesAsync();
+            }
+            //MemoryStream ms = new();
+            //await image.CopyToAsync(ms);
+            //category.Image = ms.ToArray();
+
+            //_db.Categories.Add(category);
+            //await _db.SaveChangesAsync();
             return category;
         }
 
-        public async Task Put(Category category)
+        public async Task<Category> Put(Category category, List<IFormFile> image)
         {
-            _db.Entry(category).State = EntityState.Modified;
-            await _db.SaveChangesAsync();
-        }
+            //MemoryStream ms = new();
+            //await image.CopyToAsync(ms);
+            //category.Image = ms.ToArray();
 
+            foreach (var file in image)
+            {
+                MemoryStream ms = new();
+                await file.CopyToAsync(ms);
+                category.Image = ms.ToArray();
+                _db.Categories.Update(category);
+                await _db.SaveChangesAsync();
+            }
+
+            return category;
+            //_db.Entry(category).State = EntityState.Modified;
+            //await _db.SaveChangesAsync();
+        }
     }
 }
