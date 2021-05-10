@@ -11,6 +11,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Store-APP", "Store-APP\Stor
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Store-Client", "Store-Client\Store-Client.csproj", "{02A59A72-111F-45D2-BB79-383997719AD7}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Store-Client-Blazor", "Store-Client-Blazor\Store-Client-Blazor.csproj", "{61D3401E-4EDC-4D03-9D2C-33724B9DDC26}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{02A59A72-111F-45D2-BB79-383997719AD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{02A59A72-111F-45D2-BB79-383997719AD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{02A59A72-111F-45D2-BB79-383997719AD7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{61D3401E-4EDC-4D03-9D2C-33724B9DDC26}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61D3401E-4EDC-4D03-9D2C-33724B9DDC26}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61D3401E-4EDC-4D03-9D2C-33724B9DDC26}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61D3401E-4EDC-4D03-9D2C-33724B9DDC26}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
