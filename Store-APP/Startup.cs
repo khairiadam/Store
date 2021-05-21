@@ -11,12 +11,6 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 using Store_API.Data;
-<<<<<<< HEAD
-using Store_API.Services.Auth;
-using Store_APP.Services.Categories;
-=======
-//using Store_APP.Services.Categories;
->>>>>>> 7bcb5fe19b459e4b14287d9f40d70a4424e7b56a
 using Store_APP.Services.Orders;
 using Store_APP.Services.Products;
 using Store_Shared.Models;
