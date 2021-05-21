@@ -13,11 +13,11 @@ namespace Store_Client_Blzr.Pages
         private List<Product> products { get; set; }
         //IProductService _productService;
 
-        protected override async Task OnInitializedAsync()
-        {
-            //var pr = await _productService.GetAll();
-            //var i = pr.Count;
-        }
+        //protected override async Task OnInitializedAsync()
+        //{
+        //    //var pr = await _productService.GetAll();
+        //    //var i = pr.Count;
+        //}
      
 
         //protected override async Task OnParametersSetAsync()
