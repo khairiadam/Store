@@ -1,50 +1,32 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Store_Client.Models;
+using Store_Client.Services.ProductService;
 using Store_Shared.Models;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace Store_Client.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-        HttpClient client;
-        IEnumerable<Product> products = null;
-        public HomeController(ILogger<HomeController> logger, HttpClient client)
+        private IProductSer _product;
+
+        public HomeController(ILogger<HomeController> logger, IProductSer product)
         {
             _logger = logger;
-            this.client = client;
-            this.client.BaseAddress = new Uri("http://localhost:4000/api/");
+            _product = product;
         }
 
-        public IActionResult Index()
+        public async Task<ActionResult> Index()
         {
 
-            //HTTP GET
-            var responseTask = client.GetAsync("Product");
-            responseTask.Wait();
-
-            var result = responseTask.Result;
-            if (result.IsSuccessStatusCode)
-            {
-                var readTask = result.Content.ReadAsAsync<List<Product>>();
-                readTask.Wait();
-
-                products = readTask.Result;
-            }
-            else //web api sent error response 
-            {
-                //log response status here..
-
-                products = Enumerable.Empty<Product>();
-
-                ModelState.AddModelError(string.Empty, "Server error. Please contact administrator.");
-            }
+            var products = await _product.Get();
 
             return View(products);
         }

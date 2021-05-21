@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Store_Client.Services.ProductService;
 
 namespace Store_Client
 {
@@ -18,6 +19,7 @@ namespace Store_Client
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<IProductSer, ProductSer>();
             services.AddControllersWithViews();
             services.AddHttpClient();
         }
