@@ -3,6 +3,9 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="apple-touch-icon" href="~/img/apple-icon.png">
+    <link rel="shortcut icon" type="image/x-icon" href="~/img/favicon.ico">
+
     <title>@ViewData["Title"] - Store_Client</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
 
@@ -16,7 +19,13 @@
     <link rel="stylesheet" href="~/css/site.css" />
 
     <link rel="stylesheet" href="~/css/custom.css">
-
+    @{
+        if (ViewData["Title"].ToString().Contains("Contact"))
+        {
+            <!-- Load map styles -->
+            <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A==" crossorigin="" />
+        }
+    }
 
     <!-- Slick -->
     <!--<link rel="stylesheet" type="text/css" href="assets/css/slick.min.css">
@@ -80,16 +89,16 @@
                     <div class="flex-fill">
                         <ul class="nav navbar-nav d-flex justify-content-between mx-lg-auto">
                             <li class="nav-item">
-                                <a class="nav-link" href="index.html">Home</a>
+                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="about.html">About</a>
+                                <a class="nav-link" asp-area="" asp-controller="About" asp-action="Index">About</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="shop.html">Shop</a>
+                                <a class="nav-link" asp-area="" asp-controller="Shop" asp-action="Index">Shop</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="contact.html">Contact</a>
+                                <a class="nav-link" asp-area="" asp-controller="Contact" asp-action="Index">Contact</a>
                             </li>
                         </ul>
                     </div>
