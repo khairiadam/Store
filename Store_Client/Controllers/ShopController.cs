@@ -26,7 +26,7 @@ namespace Store_Client.Controllers
             return View(products);
         }
 
-        public IActionResult Detail(string id)
+        public IActionResult Details(string id)
         {
             var product = _product.Get(id);
 
