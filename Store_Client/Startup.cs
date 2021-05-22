@@ -3,6 +3,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Store_Client.Services.AccountService;
+using Store_Client.Services.CategoryService;
+using Store_Client.Services.HttpService;
+using Store_Client.Services.LocalStorageService;
 using Store_Client.Services.ProductService;
 
 namespace Store_Client
@@ -20,6 +24,12 @@ namespace Store_Client
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<IProductSer, ProductSer>();
+            services.AddScoped<ICategorySer, CategorySer>();
+            services.AddScoped<IHttpService, HttpService>();
+            services.AddScoped<IAccountService, AccountService>();
+            services.AddScoped<ILocalStorageService, LocalStorageService>();
+            //services.AddScoped<IHttpService, HttpService>();
+
             services.AddControllersWithViews();
             services.AddHttpClient();
         }

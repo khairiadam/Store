@@ -18,7 +18,7 @@ namespace Store_Client.Services.ProductService
             _client.BaseAddress = new Uri("http://localhost:4000/api/");
         }
 
-        public async Task<IEnumerable<Product>> Get()
+        public IEnumerable<Product> Get()
         {
             IEnumerable<Product> products = null;
 
@@ -43,7 +43,7 @@ namespace Store_Client.Services.ProductService
             return products;
         }
 
-        public async Task<Product> Get(string id)
+        public Product Get(string id)
         {
             Product product = null;
             var responseTask = _client.GetAsync($"Product/{id}");

@@ -9,8 +9,8 @@ namespace Store_Client.Services.ProductService
 {
     public interface IProductSer
     {
-        Task<IEnumerable<Product>> Get();
-        Task<Product> Get(string id);
+        IEnumerable<Product> Get();
+        Product Get(string id);
 
     }
 }

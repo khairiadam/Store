@@ -23,12 +23,9 @@ namespace Store_Client.Controllers
             _product = product;
         }
 
-        public async Task<ActionResult> Index()
+        public  ActionResult Index()
         {
-
-            var products = await _product.Get();
-
-            return View(products);
+            return View();
         }
 
         public IActionResult Privacy()
