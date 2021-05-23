@@ -18,7 +18,7 @@ namespace Store_APP.Controllers
             _category = category;
         }
 
-        [HttpGet("Categories")]
+        [HttpGet]
         public async Task<List<Category>> GetCategories()
         {
             return await _category.GetAll();

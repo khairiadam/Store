@@ -17,7 +17,12 @@
                             <i class="fa fa-fw fa-chevron-circle-down mt-1"></i>
                         </a>
                         <ul class="collapse show list-unstyled pl-3">
-                            <li><a class="text-decoration-none" href="#">Men</a></li>
+                            @foreach (var  item in ViewBag.Categories)
+                            {
+
+                                <li><a class="text-decoration-none" href="#">@item.Name</a></li>
+
+                            }
                             <li><a class="text-decoration-none" href="#">Women</a></li>
                         </ul>
                     </li>

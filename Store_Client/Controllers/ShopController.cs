@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Store_Shared.Models;
 
 namespace Store_Client.Controllers
 {
@@ -19,21 +20,30 @@ namespace Store_Client.Controllers
             _product = product;
             _category = category;
         }
+      
 
-        public IActionResult Index()
+        [HttpGet("Shop")]
+        [HttpGet("Shop/{id}")]
+        public IActionResult Index(string id = null)
         {
-            var products = _product.Get();
+            ViewBag.Categories = _category.Get();
+            
+            IEnumerable<Product> products = null;
+            if (id == null)
+            {
+                products = _product.Get();
+
+            }
+            else
+            {
+                products = _product.GetByCategory(id);
+
+            }
 
             return View(products);
         }
 
 
-        public IActionResult Index(string idCategory)
-        {
-            var products = _product.GetByCategory(idCategory);
-
-            return View(products);
-        }
 
         public IActionResult Details(string id)
         {
