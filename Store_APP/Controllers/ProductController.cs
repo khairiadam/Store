@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Store_APP.Services.Products;
 using Store_Shared.Models;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 
 
@@ -37,9 +38,9 @@ namespace Store_APP.Controllers
         {
             var result = await _iProductService.GetByCategory(categoryId);
 
-            if (result == null)
+            if (result == null || !result.Any())
             {
-                return NotFound();
+                return NotFound("No Content");
             }
 
             return Ok(result);
@@ -53,9 +54,9 @@ namespace Store_APP.Controllers
         {
             var result = await _iProductService.Get(id);
 
-            if (result == null)
+            if (result == null )
             {
-                return NotFound();
+                return NotFound("No Content");
             }
 
             return Ok(result);

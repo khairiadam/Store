@@ -10,7 +10,7 @@ namespace Store_Client.Services.ProductService
 {
     public class ProductSer : IProductSer
     {
-         HttpClient _client;
+        HttpClient _client;
 
         public ProductSer(HttpClient client)
         {
@@ -41,6 +41,27 @@ namespace Store_Client.Services.ProductService
                 products = Enumerable.Empty<Product>();
             }
             return products;
+        }
+
+        public IEnumerable<Product> GetByCategory(string idCategory)
+        {
+            IEnumerable<Product> products = new List<Product>();
+            var responseTask = _client.GetAsync($"Product/Category/{idCategory}");
+            responseTask.Wait();
+
+            var result = responseTask.Result;
+            if (result.IsSuccessStatusCode)
+            {
+                var readTask = result.Content.ReadAsAsync<IEnumerable<Product>>();
+                readTask.Wait();
+
+                products = readTask.Result;
+                return products;
+            }
+            else
+            {
+                return products;
+            }
         }
 
         public Product Get(string id)

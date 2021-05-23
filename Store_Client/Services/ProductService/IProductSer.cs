@@ -10,6 +10,7 @@ namespace Store_Client.Services.ProductService
     public interface IProductSer
     {
         IEnumerable<Product> Get();
+        IEnumerable<Product> GetByCategory(string idCategory);
         Product Get(string id);
 
     }

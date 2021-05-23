@@ -33,8 +33,9 @@ namespace Store_APP
 
             //!! Add DBContext ===>
             services.AddDbContext<AppDbContext>(option =>
-                option.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"))
-            );
+                option.UseSqlServer(Configuration.GetConnectionString("Omar"))
+                //option.UseSqlServer(Configuration.GetConnectionString("Adam"))
+                    );
 
 
             ////!! _ DependencyInjection _ ===>
