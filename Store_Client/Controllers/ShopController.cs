@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 
 namespace Store_Client.Controllers
 {
+    
     public class ShopController : Controller
     {
         private IProductSer _product;
@@ -18,7 +19,7 @@ namespace Store_Client.Controllers
             _product = product;
             _category = category;
         }
-
+        
         public IActionResult Index()
         {
             var products = _product.Get();

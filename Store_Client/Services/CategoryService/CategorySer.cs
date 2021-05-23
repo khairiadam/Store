@@ -43,7 +43,7 @@ namespace Store_Client.Services.CategoryService
             return categories;
         }
 
-        public Category Get(string id)
+        public async Task<Category> GetAsync(string id)
         {
             Category category = null;
 
@@ -55,10 +55,10 @@ namespace Store_Client.Services.CategoryService
 
             if (result.IsSuccessStatusCode)
             {
-                var readTask = result.Content.ReadAsAsync<Category>();
-                readTask.Wait();
+                var readTask =await result.Content.ReadAsAsync<Category>();
 
-                category = readTask.Result;
+
+                category = readTask;
             }
             else //web api sent error response 
             {
