@@ -28,6 +28,7 @@ namespace Store_Client.Controllers
         {
             ViewBag.Categories = _category.Get();
             
+            
             IEnumerable<Product> products = null;
             if (id == null)
             {

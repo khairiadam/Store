@@ -21,5 +21,6 @@ namespace Store_Shared.Models
         [JsonIgnore]
         public List<Images> ProductImages { get; set; }
 
+
     }
 }
