@@ -57,10 +57,9 @@ namespace Store_APP.Services.Products
 
         public async Task<Product> Post(Product model, List<IFormFile> image)
         {
-            Category category = new();
-            category.Id = model.ProductCategoryId;
+           
 
-            await _context.Products.AddAsync(model);
+            await _context.AddAsync(model);
             await _context.SaveChangesAsync();
 
             foreach (var file in image)
@@ -70,9 +69,10 @@ namespace Store_APP.Services.Products
 
                 await file.CopyToAsync(ms);
                 images.Image = ms.ToArray();
-                images.Id = model.Id;
 
-                await _context.Images.AddAsync(images);
+                images.ProductImgId = model.Id;
+
+                await _context.AddAsync(images);
                 await _context.SaveChangesAsync();
             }
             return model;
@@ -115,7 +115,7 @@ namespace Store_APP.Services.Products
                 } );
 
 
-                return productModels;
+            return productModels;
 
 
 

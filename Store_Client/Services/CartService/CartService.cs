@@ -50,7 +50,7 @@ namespace Store_Client.Services.CartService
             await _localStorage.SetItem("cart", cart);
 
             var product = _productService.Get(item.Product.Id);
-            _toastService.AddSuccessToastMessage(product.Name + ", Added to Cart.");
+            _toastService.AddSuccessToastMessage(product.Product.Name + ", Added to Cart.");
 
             OnChange.Invoke();
         }
@@ -63,7 +63,7 @@ namespace Store_Client.Services.CartService
             var product = _productService.Get(id);
 
 
-            cartItem.Product = product;
+            cartItem.Product = product.Product;
             //cartItem.ProductId = product.Id;
             await AddToCart(cartItem);
 

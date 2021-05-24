@@ -7,6 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 using Store_Shared.Dto;
 
+
+
+
 namespace Store_Client.Services.ProductService
 {
     public class ProductSer : IProductSer
@@ -34,6 +37,9 @@ namespace Store_Client.Services.ProductService
                 readTask.Wait();
 
                 products = readTask.Result;
+
+
+
             }
             else //web api sent error response 
             {
@@ -43,6 +49,11 @@ namespace Store_Client.Services.ProductService
             }
             return products;
         }
+
+        //public   System.Drawing.ICmage LoadBase64(string base64)
+        //{
+        //    var img = Image.FromStream(new MemoryStream(Convert.FromBase64String(base64String)));
+        //}
 
         public IEnumerable<ProductModel> GetByCategory(string idCategory)
         {
