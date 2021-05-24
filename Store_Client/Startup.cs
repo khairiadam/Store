@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using NToastNotify;
 using Store_Client.Services.AccountService;
 using Store_Client.Services.CategoryService;
 using Store_Client.Services.HttpService;
@@ -30,7 +31,13 @@ namespace Store_Client
             services.AddScoped<ILocalStorageService, LocalStorageService>();
             //services.AddScoped<IHttpService, HttpService>();
 
-            services.AddControllersWithViews();
+            services.AddMvc().AddNToastNotifyToastr(new ToastrOptions()
+            {
+                ProgressBar = false,
+                PositionClass = ToastPositions.BottomCenter
+            });
+
+            //services.AddControllersWithViews();
             services.AddHttpClient();
         }
 
@@ -49,7 +56,7 @@ namespace Store_Client
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseNToastNotify();
             app.UseRouting();
 
             app.UseAuthorization();

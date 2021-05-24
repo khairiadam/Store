@@ -43,7 +43,7 @@ namespace Store_API
 
             //!! Add DBContext ===>
             services.AddDbContext<AppDbContext>(option =>
-                option.UseSqlServer(Configuration.GetConnectionString("Omar"))
+                option.UseSqlServer(Configuration.GetConnectionString("Adam"))
             );
 
 
