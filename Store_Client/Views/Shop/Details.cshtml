@@ -1,4 +1,5 @@
-﻿@model Store_Shared.Models.Product
+@model Store_Shared.Dto.ProductModel
+
 
 @{
     ViewData["Title"] = "Detail";
@@ -33,7 +34,9 @@
                                         <a href="#">
                                             <img class="card-img img-fluid" src="~/img/product_single_01.jpg" alt="Product Image 1">
                                         </a>
+                                        
                                     </div>
+
                                     <div class="col-4">
                                         <a href="#">
                                             <img class="card-img img-fluid" src="~/img/product_single_02.jpg" alt="Product Image 2">
@@ -107,8 +110,8 @@
             <div class="col-lg-7 mt-5">
                 <div class="card">
                     <div class="card-body">
-                        <h1 class="h2">@Model.Name</h1>
-                        <p class="h3 py-2"><strong>@Model.Price</strong>.00 USD</p>
+                        <h1 class="h2">@Model.Product.Name</h1>
+                        <p class="h3 py-2"><strong>@Model.Product.Price</strong>.00 USD</p>
                         <p class="py-2">
                             <i class="fa fa-star text-warning"></i>
                             <i class="fa fa-star text-warning"></i>
@@ -127,22 +130,30 @@
                         </ul>
 
                         <h6>Description:</h6>
-                        <p>@Model.ShortDescription</p>
+                        <p>@Model.Product.ShortDescription</p>
                         <ul class="list-inline">
                             <li class="list-inline-item">
                                 <h6> Color :</h6>
                             </li>
                             <li class="list-inline-item">
-                                <p class="text-muted"><strong>@Model.Color</strong></p>
+                                <p class="text-muted"><strong>@Model.Product.Color</strong></p>
                             </li>
                         </ul>
 
                         <h6>Specification:</h6>
-                       <p>@Model.LongDescription</p>
+                       <p>@Model.Product.LongDescription</p>
+                        
+                        @foreach (var item in Model.ProductImages)
+                        {
+
+                            <p>@item.Image</p>
+
+
+
+                        }
                         
                         
-                        
-                        <p><strong>Stock : </strong> @Model.Quantity </p>
+                        <p><strong>Stock : </strong> @Model.Product.Quantity </p>
 
                         <form action="" method="GET">
                             <input type="hidden" name="product-title" value="Activewear">
@@ -178,6 +189,61 @@
 </section>
 <!-- Close Content -->
 
+
+<div>
+    <h4>Product</h4>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Product.Id)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Product.Id)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Product.Name)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Product.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Product.ShortDescription)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Product.ShortDescription)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Product.LongDescription)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Product.LongDescription)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Product.Quantity)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Product.Quantity)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Product.Color)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Product.Color)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Product.Price)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Product.Price)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Product.ProductCategoryId)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Product.ProductCategoryId)
+        </dd>
+    </dl>
+</div>
 <div>
     @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
     <a asp-action="Index">Back to List</a>

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Store_Shared.Dto;
 
 namespace Store_APP.Services.Products
 {
@@ -28,12 +29,27 @@ namespace Store_APP.Services.Products
 
 
 
-        public async Task<Product> Get(string Id)
+        public async Task<ProductModel> Get(string Id)
         {
-            var getProduct = await _context.Products
-                .FindAsync(Id);
 
-            return getProduct;
+            var getProduct = await _context.Products.Include(p => p.ProductImages)
+                .Include(p => p.ProductCategory)
+                .FirstOrDefaultAsync(p => p.Id == Id);
+            var Getimg = _context.Images.Where(p => p.ProductImgId == Id);
+
+            
+
+            List<Images> imgProd = new ();
+            await Getimg.ForEachAsync(i =>
+            {
+                imgProd.Add(i);
+            });
+            var product = new ProductModel
+            {
+                Product = getProduct,
+                ProductImages = imgProd
+            };
+            return product;
         }
 
 

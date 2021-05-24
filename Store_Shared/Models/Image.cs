@@ -10,6 +10,7 @@ namespace Store_Shared.Models
         public string Id { get; set; }
         public Product ProductImg { get; set; }
         public byte[] Image { get; set; }
+        public string ProductImgId { get; set; }
 
     }
 }

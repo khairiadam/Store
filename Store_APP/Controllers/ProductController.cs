@@ -51,7 +51,7 @@ namespace Store_APP.Controllers
 
 
 
-        [HttpGet("{Id}")]
+        [HttpGet("{id}")]
         public async Task<IActionResult> GetProduct(string id)
         {
             var result = await _iProductService.Get(id);

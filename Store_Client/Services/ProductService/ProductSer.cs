@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using Store_Shared.Dto;
 
 namespace Store_Client.Services.ProductService
 {
@@ -22,7 +23,7 @@ namespace Store_Client.Services.ProductService
         {
             IEnumerable<Product> products = null;
 
-            //HTTP GET
+            //Call HTTP GET
             var responseTask = _client.GetAsync("Product");
             responseTask.Wait();
 
@@ -64,16 +65,16 @@ namespace Store_Client.Services.ProductService
             }
         }
 
-        public Product Get(string id)
+        public ProductModel Get(string id)
         {
-            Product product = null;
+            ProductModel product = null;
             var responseTask = _client.GetAsync($"Product/{id}");
             responseTask.Wait();
 
             var result = responseTask.Result;
             if (result.IsSuccessStatusCode)
             {
-                var readTask = result.Content.ReadAsAsync<Product>();
+                var readTask = result.Content.ReadAsAsync<ProductModel>();
                 readTask.Wait();
 
                 product = readTask.Result;
