@@ -11,6 +11,7 @@ $(document).ready(function() {
 
     // Accordion
     var all_panels = $('.templatemo-accordion > li > ul').hide();
+        $('.templatemo-accordion > li > ul').show();
 
     $('.templatemo-accordion > li > a').click(function() {
         console.log('Hello world!');
@@ -18,6 +19,8 @@ $(document).ready(function() {
         if(!target.hasClass('active')){
             all_panels.removeClass('active').slideUp();
             target.addClass('active').slideDown();
+        } else {
+            target.removeClass('active').slideUp();
         }
       return false;
     });
