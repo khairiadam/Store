@@ -34,7 +34,9 @@ namespace Store_APP
             //!! Add DBContext ===>
             services.AddDbContext<AppDbContext>(option =>
                 //option.UseSqlServer(Configuration.GetConnectionString("Omar"))
-                option.UseSqlServer(Configuration.GetConnectionString("Adam"))
+                //option.UseSqlServer(Configuration.GetConnectionString("Adam"))
+                option.UseSqlServer(Configuration.GetConnectionString("Salma"))
+
                     );
 
 
@@ -50,7 +52,7 @@ namespace Store_APP
 
 
             services.AddControllers();
-            services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "Store_APP", Version = "v1"}); });
+            services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "Store_APP", Version = "v1" }); });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -66,7 +68,7 @@ namespace Store_APP
             app.UseHttpsRedirection();
 
             app.UseRouting();
-// global cors policy
+            // global cors policy
             app.UseCors(x => x
                 .AllowAnyMethod()
                 .AllowAnyHeader()
