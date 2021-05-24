@@ -1,0 +1,45 @@
+﻿@page "/"
+@inject IProductService _productService
+@inject ISyncLocalStorageService _localStorage
+
+<h3>Index</h3>
+
+<ul class="list-unstyled">
+    @foreach (var product in products)
+    {
+        <li class="media my-3">
+            <div class="media-img-wrapper mr-2">
+                <a href="/product/@product.Id">
+                    <img class="media-img" src="@product.ProductImages" alt="@product.Name" />
+                </a>
+            </div>
+            <div class="media-body">
+                <a href="/product/@product.Id">
+                    <h4 class="mb-0">@product.ShortDescription</h4>
+                </a>
+                <p>@product.LongDescription</p>
+                <h5 class="price">
+                   
+                </h5>
+            </div>
+        </li>
+    }
+</ul>
+
+@* if (category != null) *@
+@* { *@
+@* <h1>Welcome to the @category.Name section!</h1> *@
+@* <ProductList /> *@
+@* } *@
+@* else *@
+@* { *@
+@* <AuthorizeView> *@
+@*     <NotAuthorized> *@
+@*         <h1>Welcome to Blazing Shop!</h1> *@
+@*     </NotAuthorized> *@
+@*     <Authorized> *@
+@*         $1$<h1>Welcome back, @localStorage.GetItemAsString("username")!</h1>#1# *@
+@*     </Authorized> *@
+@* </AuthorizeView> *@
+@* <ProductList /> *@
+@* } *@
