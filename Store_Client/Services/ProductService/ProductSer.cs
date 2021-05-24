@@ -19,9 +19,9 @@ namespace Store_Client.Services.ProductService
             _client.BaseAddress = new Uri("http://localhost:4000/api/");
         }
 
-        public IEnumerable<Product> Get()
+        public IEnumerable<ProductModel> Get()
         {
-            IEnumerable<Product> products = null;
+            IEnumerable<ProductModel> products = null;
 
             //Call HTTP GET
             var responseTask = _client.GetAsync("Product");
@@ -30,7 +30,7 @@ namespace Store_Client.Services.ProductService
             var result = responseTask.Result;
             if (result.IsSuccessStatusCode)
             {
-                var readTask = result.Content.ReadAsAsync<List<Product>>();
+                var readTask = result.Content.ReadAsAsync<List<ProductModel>>();
                 readTask.Wait();
 
                 products = readTask.Result;
@@ -39,21 +39,21 @@ namespace Store_Client.Services.ProductService
             {
                 //log response status here..
 
-                products = Enumerable.Empty<Product>();
+                products = Enumerable.Empty<ProductModel>();
             }
             return products;
         }
 
-        public IEnumerable<Product> GetByCategory(string idCategory)
+        public IEnumerable<ProductModel> GetByCategory(string idCategory)
         {
-            IEnumerable<Product> products = new List<Product>();
+            IEnumerable<ProductModel> products = new List<ProductModel>();
             var responseTask = _client.GetAsync($"Product/Category/{idCategory}");
             responseTask.Wait();
 
             var result = responseTask.Result;
             if (result.IsSuccessStatusCode)
             {
-                var readTask = result.Content.ReadAsAsync<IEnumerable<Product>>();
+                var readTask = result.Content.ReadAsAsync<IEnumerable<ProductModel>>();
                 readTask.Wait();
 
                 products = readTask.Result;

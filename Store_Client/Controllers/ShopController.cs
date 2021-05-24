@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Store_Shared.Dto;
 using Store_Shared.Models;
 
 namespace Store_Client.Controllers
@@ -29,7 +30,7 @@ namespace Store_Client.Controllers
             ViewBag.Categories = _category.Get();
             
             
-            IEnumerable<Product> products = null;
+            IEnumerable<ProductModel> products = null;
             if (id == null)
             {
                 products = _product.Get();
