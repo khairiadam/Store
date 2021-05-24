@@ -71,7 +71,7 @@ namespace Store_API.Services.Auth
             }
 
             //Add new Users To [User] Role
-            await _userManager.AddToRoleAsync(user, "User");
+            await _userManager.AddToRoleAsync(user, "Client");
 
             var jwtSecurityToken = await CreateJwtToken(user);
 
@@ -81,7 +81,7 @@ namespace Store_API.Services.Auth
                 ExpiresOn = jwtSecurityToken.ValidTo,
                 IsAuthenticated = true,
                 //TODO To Change ==>
-                Roles = new List<string> { "User" },
+                Roles = new List<string> { "Client" },
                 Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
                 Username = user.UserName
             };
