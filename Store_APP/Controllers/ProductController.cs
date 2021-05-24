@@ -29,7 +29,9 @@ namespace Store_APP.Controllers
         [HttpGet]
         public async Task<IActionResult> Get()
         {
-            return Ok(await _iProductService.GetAll());
+            var products = await _iProductService.GetAll();
+            if (products is null || !products.Any()) return NotFound("No Content to show !");
+            return Ok(products);
         }
 
 
@@ -54,7 +56,7 @@ namespace Store_APP.Controllers
         {
             var result = await _iProductService.Get(id);
 
-            if (result == null )
+            if (result == null)
             {
                 return NotFound("No Content");
             }
