@@ -1,8 +1,10 @@
-﻿namespace Store_Shared.Models
+﻿using Store_Shared.Dto;
+
+namespace Store_Shared.Models
 {
     public class CartItem
     {
-        public Product Product { get; set; }
+        public ProductModel Product { get; set; }
      
         public int Quantity { get; set; }
     }

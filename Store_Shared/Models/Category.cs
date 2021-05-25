@@ -17,6 +17,7 @@ namespace Store_Shared.Models
         public byte[] Image { get; set; }
 
         public string Url { get; set; }
+
         [JsonIgnore]
         public List<Product> Products { get; set; }
     }
