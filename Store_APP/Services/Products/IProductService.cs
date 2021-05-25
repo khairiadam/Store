@@ -9,9 +9,9 @@ namespace Store_APP.Services.Products
 {
     public interface IProductService
     {
-        Task<IEnumerable<Product>> GetAll();
+        Task<IEnumerable<ProductModel>> GetAll();
         Task<ProductModel> Get(string Id);
-        Task<IEnumerable<Product>> GetByCategory(string CategoryId);
+        Task<IEnumerable<ProductModel>> GetByCategory(string CategoryId);
         Task<Product> Post(Product model, List<IFormFile> image);
         Task Delete(string Id);
         Task Update(Product model);
