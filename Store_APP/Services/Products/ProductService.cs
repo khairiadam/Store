@@ -39,7 +39,7 @@ namespace Store_APP.Services.Products
         public async Task<ProductModel> Get(string Id)
         {
             var getProduct = await _context.Products.Include(p => p.ProductImages)
-               
+
                 .FirstOrDefaultAsync(p => p.Id == Id);
             var Getimg = _context.Images.Where(p => p.ProductImgId == Id);
 
@@ -51,13 +51,14 @@ namespace Store_APP.Services.Products
             var product = new ProductModel
             {
                 Product = getProduct,
-                ProductImages = imgProd };
+                ProductImages = imgProd
+            };
             return product;
         }
 
         public async Task<Product> Post(Product model, List<IFormFile> image)
         {
-           
+
 
             await _context.AddAsync(model);
             await _context.SaveChangesAsync();
@@ -84,7 +85,11 @@ namespace Store_APP.Services.Products
             var deleteimage = await _context.Images.FindAsync(Id);
 
             _context.Products.Remove(DeleteProduct);
-            _context.Images.Remove(deleteimage);
+            if (deleteimage is not null)
+            {
+                _context.Images.Remove(deleteimage);
+
+            }
 
             await _context.SaveChangesAsync();
         }
@@ -99,20 +104,20 @@ namespace Store_APP.Services.Products
         {
             List<ProductModel> productModels = new List<ProductModel>();
 
-                await _context.Products
-                .Include(p => p.ProductCategory)
-                .Where(p => p.ProductCategoryId == CategoryId).ForEachAsync(p =>
+            await _context.Products
+            .Include(p => p.ProductCategory)
+            .Where(p => p.ProductCategoryId == CategoryId).ForEachAsync(p =>
+            {
+
+                ProductModel pro = new ProductModel
                 {
-
-                    ProductModel pro = new ProductModel
-                    {
-                        Product = p
-                    };
-                    productModels.Add(pro);
+                    Product = p
+                };
+                productModels.Add(pro);
 
 
 
-                } );
+            });
 
 
             return productModels;

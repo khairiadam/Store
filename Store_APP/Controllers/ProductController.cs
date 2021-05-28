@@ -83,7 +83,7 @@ namespace Store_APP.Controllers
 
 
 
-        [HttpDelete("Delete/{Id}")]
+        [HttpDelete("Delete/{id}")]
         public async Task<IActionResult> DeleteProduct(string id)
         {
 

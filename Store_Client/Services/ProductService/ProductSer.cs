@@ -3,7 +3,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
+using System.Net.Http.Json;
 using System.Text;
+using System.Text.Json;
 using System.Threading.Tasks;
 using Store_Shared.Dto;
 
@@ -95,6 +97,17 @@ namespace Store_Client.Services.ProductService
             {
                 return product;
             }
+        }
+
+
+        public async Task<bool> AddProduct(Product product)
+        {
+            if (product == null) return false;
+
+            var productJson = JsonSerializer.Serialize(product);
+            var requestC = new StringContent(productJson, Encoding.UTF8, "application/Json");
+            var request = await _client.PostAsync("/product/Add", requestC);
+                return true;
         }
     }
 }
