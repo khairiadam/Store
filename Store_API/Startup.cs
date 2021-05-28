@@ -45,7 +45,7 @@ namespace Store_API
             services.AddDbContext<AppDbContext>(option =>
                 //option.UseSqlServer(Configuration.GetConnectionString("Omar"))
                 //option.UseSqlServer(Configuration.GetConnectionString("Adam"))
-                option.UseSqlServer(Configuration.GetConnectionString("Salma"))
+                option.UseSqlServer(Configuration.GetConnectionString("imad"))
             );
 
 
