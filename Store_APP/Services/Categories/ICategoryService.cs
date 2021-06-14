@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Http;
-using Store_Shared.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
+using Store_Shared.Models;
 
 namespace Store_API.Services.Categories
 {

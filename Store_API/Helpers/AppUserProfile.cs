@@ -8,12 +8,12 @@ namespace Store_API.Helpers
     {
         public AppUserProfile()
         {
-            this.CreateMap<ApplicationUser, RegisterModel>();
-            this.CreateMap<RegisterModel, ApplicationUser>();
-            this.CreateMap<ApplicationUser, AuthModel>();
-            this.CreateMap<ApplicationUser, ApplicationUser>();
-            this.CreateMap<EditUserModel, RegisterModel>();
-            this.CreateMap<ApplicationUser, UserModel>();
+            CreateMap<ApplicationUser, RegisterModel>();
+            CreateMap<RegisterModel, ApplicationUser>();
+            CreateMap<ApplicationUser, AuthModel>();
+            CreateMap<ApplicationUser, ApplicationUser>();
+            CreateMap<EditUserModel, RegisterModel>();
+            CreateMap<ApplicationUser, UserModel>();
         }
     }
 }

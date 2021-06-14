@@ -1,6 +1,6 @@
-﻿using Store_Shared.Models;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Store_Shared.Models;
 
 namespace Store_Client.Services.CategoryService
 {
@@ -9,5 +9,4 @@ namespace Store_Client.Services.CategoryService
         IEnumerable<Category> Get();
         Task<Category> GetAsync(string id);
     }
-
 }

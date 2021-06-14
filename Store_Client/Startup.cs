@@ -31,7 +31,7 @@ namespace Store_Client
             services.AddScoped<ILocalStorageService, LocalStorageService>();
             //services.AddScoped<IHttpService, HttpService>();
 
-            services.AddMvc().AddNToastNotifyToastr(new ToastrOptions()
+            services.AddMvc().AddNToastNotifyToastr(new ToastrOptions
             {
                 ProgressBar = false,
                 PositionClass = ToastPositions.BottomCenter
@@ -54,6 +54,7 @@ namespace Store_Client
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseNToastNotify();
@@ -64,8 +65,8 @@ namespace Store_Client
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllerRoute(
-                    name: "default",
-                    pattern: "{controller=Home}/{action=Index}/{id?}");
+                    "default",
+                    "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

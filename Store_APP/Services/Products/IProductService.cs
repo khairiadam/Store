@@ -1,9 +1,8 @@
-using Microsoft.AspNetCore.Http;
-using Store_Shared.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Store_Shared.Dto;
-
+using Store_Shared.Models;
 
 namespace Store_APP.Services.Products
 {
@@ -15,6 +14,5 @@ namespace Store_APP.Services.Products
         Task<Product> Post(Product model, List<IFormFile> image);
         Task Delete(string Id);
         Task Update(Product model);
-
     }
 }

@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Store_API.Services.Auth;
 using Store_Shared.Dto;
-using System.Threading.Tasks;
 
 namespace Store_API.Controllers
 {
@@ -9,8 +9,6 @@ namespace Store_API.Controllers
     [ApiController]
     public class AuthController : ControllerBase
     {
-
-
         private readonly IAuthService _authService;
 
 
@@ -20,9 +18,7 @@ namespace Store_API.Controllers
         }
 
 
-
         #region Registration Method (Create Token and register user)
-
 
         [HttpPost("Register")]
         public async Task<IActionResult> RegisterAsync([FromBody] RegisterModel model)
@@ -39,18 +35,12 @@ namespace Store_API.Controllers
             //In case success return Ok with the result OR Object with some info (Needed!)
             //return Ok(new {Token = result.Token , ExpiresOn= result.ExpiresOn});
             return Ok(result);
-
         }
-
 
         #endregion
 
 
-
-
-
         #region Login Method (Get Token)
-
 
         [HttpPost("login")]
         public async Task<IActionResult> LoginAsync([FromBody] TokenRequestModel model)
@@ -69,8 +59,6 @@ namespace Store_API.Controllers
             return Ok(result);
         }
 
-
         #endregion
-
     }
 }

@@ -1,10 +1,10 @@
-﻿using Blazored.LocalStorage;
-using Microsoft.AspNetCore.Components.Authorization;
-using Store_Shared.Helpers;
-using System.Net.Http;
+﻿using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Security.Claims;
 using System.Threading.Tasks;
+using Blazored.LocalStorage;
+using Microsoft.AspNetCore.Components.Authorization;
+using Store_Shared.Helpers;
 
 namespace Store_Client_Blzr.Services.AuthService
 {
@@ -12,8 +12,7 @@ namespace Store_Client_Blzr.Services.AuthService
     {
         private readonly HttpClient _httpClient;
         private readonly ILocalStorageService _localStorage;
-        readonly AuthenticationState _state;
-
+        private readonly AuthenticationState _state;
 
 
         public AuthProvider(HttpClient httpClient, ILocalStorageService localStorage, AuthenticationState state)
@@ -21,7 +20,6 @@ namespace Store_Client_Blzr.Services.AuthService
             _httpClient = httpClient;
             _localStorage = localStorage;
             _state = state;
-
         }
 
         public override async Task<AuthenticationState> GetAuthenticationStateAsync()
@@ -30,19 +28,18 @@ namespace Store_Client_Blzr.Services.AuthService
             if (string.IsNullOrWhiteSpace(token))
                 return _state;
             _httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("bearer", token);
-            return new AuthenticationState(new ClaimsPrincipal(new ClaimsIdentity(JwtParser.ParseClaimsFromJwt(token), "jwtAuthType")));
-
+            return new AuthenticationState(
+                new ClaimsPrincipal(new ClaimsIdentity(JwtParser.ParseClaimsFromJwt(token), "jwtAuthType")));
         }
-
 
 
         public void NotifyUserAuthentication(string email)
         {
-            var authenticatedUser = new ClaimsPrincipal(new ClaimsIdentity(new[] { new Claim(ClaimTypes.Name, email) }, "jwtAuthType"));
+            var authenticatedUser =
+                new ClaimsPrincipal(new ClaimsIdentity(new[] {new Claim(ClaimTypes.Name, email)}, "jwtAuthType"));
             var authState = Task.FromResult(new AuthenticationState(authenticatedUser));
             NotifyAuthenticationStateChanged(authState);
         }
-
 
 
         public void NotifyUserLogout()
@@ -50,7 +47,5 @@ namespace Store_Client_Blzr.Services.AuthService
             var authState = Task.FromResult(_state);
             NotifyAuthenticationStateChanged(authState);
         }
-
-
     }
 }

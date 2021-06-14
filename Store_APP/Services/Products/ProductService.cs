@@ -1,12 +1,12 @@
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Store_API.Data;
 using Store_Shared.Dto;
 using Store_Shared.Models;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Store_APP.Services.Products
 {
@@ -21,13 +21,12 @@ namespace Store_APP.Services.Products
 
         public async Task<IEnumerable<ProductModel>> GetAll()
         {
-            List<ProductModel> productsmodels = new List<ProductModel>();
+            var productsmodels = new List<ProductModel>();
 
             await _context.Products
-                .Include(p => p.ProductCategory)
                 .ForEachAsync(p =>
                 {
-                    ProductModel pro = new ProductModel
+                    var pro = new ProductModel
                     {
                         Product = p
                     };
@@ -39,15 +38,11 @@ namespace Store_APP.Services.Products
         public async Task<ProductModel> Get(string Id)
         {
             var getProduct = await _context.Products.Include(p => p.ProductImages)
-
                 .FirstOrDefaultAsync(p => p.Id == Id);
             var Getimg = _context.Images.Where(p => p.ProductImgId == Id);
 
             List<Images> imgProd = new();
-            await Getimg.ForEachAsync(i =>
-            {
-                imgProd.Add(i);
-            });
+            await Getimg.ForEachAsync(i => { imgProd.Add(i); });
             var product = new ProductModel
             {
                 Product = getProduct,
@@ -58,8 +53,6 @@ namespace Store_APP.Services.Products
 
         public async Task<Product> Post(Product model, List<IFormFile> image)
         {
-
-
             await _context.AddAsync(model);
             await _context.SaveChangesAsync();
 
@@ -76,6 +69,7 @@ namespace Store_APP.Services.Products
                 await _context.AddAsync(images);
                 await _context.SaveChangesAsync();
             }
+
             return model;
         }
 
@@ -85,11 +79,7 @@ namespace Store_APP.Services.Products
             var deleteimage = await _context.Images.FindAsync(Id);
 
             _context.Products.Remove(DeleteProduct);
-            if (deleteimage is not null)
-            {
-                _context.Images.Remove(deleteimage);
-
-            }
+            if (deleteimage is not null) _context.Images.Remove(deleteimage);
 
             await _context.SaveChangesAsync();
         }
@@ -102,28 +92,21 @@ namespace Store_APP.Services.Products
 
         public async Task<IEnumerable<ProductModel>> GetByCategory(string CategoryId)
         {
-            List<ProductModel> productModels = new List<ProductModel>();
+            var productModels = new List<ProductModel>();
 
             await _context.Products
-            .Include(p => p.ProductCategory)
-            .Where(p => p.ProductCategoryId == CategoryId).ForEachAsync(p =>
-            {
-
-                ProductModel pro = new ProductModel
+                .Include(p => p.ProductCategory)
+                .Where(p => p.ProductCategoryId == CategoryId).ForEachAsync(p =>
                 {
-                    Product = p
-                };
-                productModels.Add(pro);
-
-
-
-            });
+                    var pro = new ProductModel
+                    {
+                        Product = p
+                    };
+                    productModels.Add(pro);
+                });
 
 
             return productModels;
-
-
-
         }
     }
 }

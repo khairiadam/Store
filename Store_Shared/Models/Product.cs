@@ -8,8 +8,10 @@ namespace Store_Shared.Models
     public class Product
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Key, Column(Order = 0)]
+        [Key]
+        [Column(Order = 0)]
         public string Id { get; set; }
+
         public string Name { get; set; }
         public string ShortDescription { get; set; }
         public string LongDescription { get; set; }
@@ -18,9 +20,10 @@ namespace Store_Shared.Models
         public double Price { get; set; }
         public Category ProductCategory { get; set; }
         public string ProductCategoryId { get; set; }
-        [JsonIgnore]
-        public List<Images> ProductImages { get; set; }
 
+        [NotMapped]
+        public List<byte[]> ImagesArray { get; set; }
 
+        [JsonIgnore] public List<Images> ProductImages { get; set; }
     }
 }

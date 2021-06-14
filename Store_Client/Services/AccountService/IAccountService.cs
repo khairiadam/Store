@@ -1,10 +1,7 @@
-﻿using Store_Shared.Dto;
-using Store_Shared.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Store_Shared.Dto;
+using Store_Shared.Models;
 
 namespace Store_Client.Services.AccountService
 {

@@ -1,6 +1,6 @@
-﻿using Store_Shared.Dto;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Store_Shared.Dto;
 
 namespace Store_API.Services.Auth
 {

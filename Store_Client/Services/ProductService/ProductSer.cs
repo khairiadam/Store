@@ -1,22 +1,18 @@
-﻿using Store_Shared.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
 using Store_Shared.Dto;
-
-
-
+using Store_Shared.Models;
 
 namespace Store_Client.Services.ProductService
 {
     public class ProductSer : IProductSer
     {
-        HttpClient _client;
+        private readonly HttpClient _client;
 
         public ProductSer(HttpClient client)
         {
@@ -39,9 +35,6 @@ namespace Store_Client.Services.ProductService
                 readTask.Wait();
 
                 products = readTask.Result;
-
-
-
             }
             else //web api sent error response 
             {
@@ -49,6 +42,7 @@ namespace Store_Client.Services.ProductService
 
                 products = Enumerable.Empty<ProductModel>();
             }
+
             return products;
         }
 
@@ -72,10 +66,8 @@ namespace Store_Client.Services.ProductService
                 products = readTask.Result;
                 return products;
             }
-            else
-            {
-                return products;
-            }
+
+            return products;
         }
 
         public ProductModel Get(string id)
@@ -93,21 +85,30 @@ namespace Store_Client.Services.ProductService
                 product = readTask.Result;
                 return product;
             }
-            else
-            {
-                return product;
-            }
+
+            return product;
         }
 
-
+//TODO Continue Post Request
         public async Task<bool> AddProduct(Product product)
         {
             if (product == null) return false;
 
             var productJson = JsonSerializer.Serialize(product);
             var requestC = new StringContent(productJson, Encoding.UTF8, "application/Json");
-            var request = await _client.PostAsync("/product/Add", requestC);
+            var response = await _client.PostAsync("/product/Add", requestC);
+
+            if (response.IsSuccessStatusCode)
+            {
+                var content = await response.Content.ReadAsStringAsync();
+                var createdCompany = JsonSerializer.Deserialize<bool>(content);
+
                 return true;
+            }
+
+            return false;
         }
+
+        // public async Task
     }
 }

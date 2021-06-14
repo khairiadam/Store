@@ -1,20 +1,22 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System.Collections.Generic;
+using System.IO;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.EntityFrameworkCore;
 using Store_API.Data;
 using Store_Shared.Models;
-using System.Collections.Generic;
-using System.IO;
-using System.Threading.Tasks;
 
 namespace Store_API.Services.Categories
 {
     public class CategoryService : ICategoryService
     {
         private readonly AppDbContext _db;
+
         public CategoryService(AppDbContext db)
         {
             _db = db;
         }
+
         //TODO Each one of the group should implement one Method
         public async Task Delete(string id)
         {

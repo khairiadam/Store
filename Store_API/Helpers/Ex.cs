@@ -7,7 +7,5 @@ namespace StoreBlzr.Server.Help
             var result = string.IsNullOrEmpty(newString) ? oldString : newString;
             return result;
         }
-
-
     }
 }

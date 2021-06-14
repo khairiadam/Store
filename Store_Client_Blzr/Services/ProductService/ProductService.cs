@@ -1,9 +1,9 @@
-﻿using Store_Shared.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
+using Store_Shared.Models;
 
 namespace Store_Client_Blzr.Services.ProductService
 {
@@ -11,25 +11,21 @@ namespace Store_Client_Blzr.Services.ProductService
     {
         private readonly HttpClient _http;
 
-        public event Action OnChange;
-
-        public List<Product> Products { get; set; } = new List<Product>();
-
         public ProductService(HttpClient http)
         {
             _http = http;
         }
 
+        public event Action OnChange;
+
+        public List<Product> Products { get; set; } = new();
+
         public async Task LoadProducts(string categoryId = null)
         {
             if (categoryId == null)
-            {
                 Products = await _http.GetFromJsonAsync<List<Product>>("Product");
-            }
             else
-            {
                 Products = await _http.GetFromJsonAsync<List<Product>>($"Product/Category/{categoryId}");
-            }
             OnChange.Invoke();
         }
 

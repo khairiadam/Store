@@ -1,9 +1,4 @@
-﻿using Store_Shared.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Store_Shared.Dto;
 
 namespace Store_Client.Services.ProductService
@@ -13,6 +8,5 @@ namespace Store_Client.Services.ProductService
         IEnumerable<ProductModel> Get();
         IEnumerable<ProductModel> GetByCategory(string idCategory);
         ProductModel Get(string id);
-
     }
 }

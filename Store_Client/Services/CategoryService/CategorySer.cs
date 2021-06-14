@@ -1,16 +1,15 @@
-﻿using Store_Shared.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net.Http;
-using System.Text;
 using System.Threading.Tasks;
+using Store_Shared.Models;
 
 namespace Store_Client.Services.CategoryService
 {
     public class CategorySer : ICategorySer
     {
-        HttpClient _client;
+        private readonly HttpClient _client;
 
         public CategorySer(HttpClient client)
         {
@@ -40,6 +39,7 @@ namespace Store_Client.Services.CategoryService
 
                 categories = Enumerable.Empty<Category>();
             }
+
             return categories;
         }
 
@@ -55,7 +55,7 @@ namespace Store_Client.Services.CategoryService
 
             if (result.IsSuccessStatusCode)
             {
-                var readTask =await result.Content.ReadAsAsync<Category>();
+                var readTask = await result.Content.ReadAsAsync<Category>();
 
 
                 category = readTask;
@@ -66,8 +66,8 @@ namespace Store_Client.Services.CategoryService
 
                 category = null;
             }
+
             return category;
         }
     }
-
 }

@@ -6,7 +6,4 @@
         Paid,
         Delivered
     }
-
-
-
 }

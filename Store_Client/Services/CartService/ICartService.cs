@@ -1,9 +1,7 @@
-﻿using Store_Shared.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using Store_Shared.Models;
 
 namespace Store_Client.Services.CartService
 {
@@ -15,5 +13,4 @@ namespace Store_Client.Services.CartService
         Task DeleteItem(CartItem item);
         Task EmptyCart();
     }
-
 }

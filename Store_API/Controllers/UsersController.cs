@@ -1,8 +1,8 @@
-﻿using Auth_API.Services.Users;
+﻿using System.Threading.Tasks;
+using Auth_API.Services.Users;
 using Microsoft.AspNetCore.Mvc;
 using Store_API.Services.Auth;
 using Store_Shared.Dto;
-using System.Threading.Tasks;
 
 namespace Store_API.Controllers
 {
@@ -10,8 +10,8 @@ namespace Store_API.Controllers
     [ApiController]
     public class UsersController : ControllerBase
     {
-        private readonly IUserService _userService;
         private readonly IAuthService _authService;
+        private readonly IUserService _userService;
 
         public UsersController(IUserService userService, IAuthService authService)
         {
@@ -30,7 +30,6 @@ namespace Store_API.Controllers
         }
 
 
-
         [HttpGet("Detail")]
         public async Task<IActionResult> GetUser(string id)
         {
@@ -42,7 +41,6 @@ namespace Store_API.Controllers
 
             return Ok(result);
         }
-
 
 
         [HttpPost("Add")]
@@ -63,7 +61,6 @@ namespace Store_API.Controllers
         }
 
 
-
         [HttpPut("Edit")]
         public async Task<IActionResult> EditUser(string userId, EditUserModel user)
         {
@@ -80,20 +77,13 @@ namespace Store_API.Controllers
         [HttpDelete("Delete")]
         public async Task<IActionResult> DeleteUser(string id)
         {
+            if (!await _userService.Delete(id)) return BadRequest(new {Message = "Couldn't Delete User !"});
 
-            if (!await _userService.Delete(id)) return BadRequest(new { Message = "Couldn't Delete User !" });
-
-            return Ok(new { Message = "User deleted successfully." });
-
+            return Ok(new {Message = "User deleted successfully."});
         }
 
 
-
-
-
-
         #region Get UserList and RoleList
-
 
         [HttpGet("Roles")]
         public async Task<IActionResult> UsersAndRolesAsync()
@@ -103,18 +93,13 @@ namespace Store_API.Controllers
 
             if (roleList.Count < 0 || usersList.Count < 0) return BadRequest();
 
-            return Ok(new { Roles = roleList, Users = usersList });
-
+            return Ok(new {Roles = roleList, Users = usersList});
         }
 
         #endregion
 
 
-
-
-
         #region Add User To Role Method
-
 
         [HttpPost("ManageRole")]
         public async Task<IActionResult> AddToRoleAsync([FromBody] AddRoleModel model)
@@ -133,8 +118,6 @@ namespace Store_API.Controllers
             return Ok(result);
         }
 
-
         #endregion
-
     }
 }

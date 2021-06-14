@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 using Store_APP.Services.Orders;
 using Store_Shared.Models;
-using System.Threading.Tasks;
 
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
@@ -44,13 +44,9 @@ namespace Store_APP.Controllers
         [HttpPost("Add")]
         public async Task<IActionResult> AddOrders(Order order)
         {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest("Couldn't add the Order");
-            }
+            if (!ModelState.IsValid) return BadRequest("Couldn't add the Order");
 
             return Ok(await _order.Post(order));
-
         }
 
 
@@ -63,7 +59,6 @@ namespace Store_APP.Controllers
             await _order.Delete(id);
 
             return Ok();
-
         }
 
 
@@ -77,6 +72,5 @@ namespace Store_APP.Controllers
 
             return Ok(order);
         }
-
     }
 }

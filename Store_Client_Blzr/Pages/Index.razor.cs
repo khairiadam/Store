@@ -1,15 +1,10 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using System.Collections.Generic;
 using Store_Shared.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Store_Client_Blzr.Pages
 {
-    public partial class Index 
+    public partial class Index
     {
-  
         private List<Product> products { get; set; }
         //IProductService _productService;
 
@@ -18,7 +13,7 @@ namespace Store_Client_Blzr.Pages
         //    //var pr = await _productService.GetAll();
         //    //var i = pr.Count;
         //}
-     
+
 
         //protected override async Task OnParametersSetAsync()
         //{

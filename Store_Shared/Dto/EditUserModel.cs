@@ -21,15 +21,19 @@ namespace Store_Shared.Dto
         [Required] public string City { get; set; }
         [Required] public string ZipCode { get; set; }
 
-        [DataType(DataType.Password), Required(ErrorMessage = "Password is required")]
+        [DataType(DataType.Password)]
+        [Required(ErrorMessage = "Password is required")]
         public string Password { get; set; }
 
         [JsonIgnore]
-        [AllowNull, DataType(DataType.Password)]
+        [AllowNull]
+        [DataType(DataType.Password)]
         public string NewPassword { get; set; }
 
         [JsonIgnore]
-        [AllowNull, DataType(DataType.Password), Compare("NewPassword", ErrorMessage = "Passwords are not identical")]
+        [AllowNull]
+        [DataType(DataType.Password)]
+        [Compare("NewPassword", ErrorMessage = "Passwords are not identical")]
         public string ConfirmNewPassword { get; set; }
 
         public string Message { get; set; }

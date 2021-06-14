@@ -1,29 +1,25 @@
-﻿using Microsoft.AspNetCore.Components;
-using Microsoft.Extensions.Configuration;
-using Store_Client.Services.LocalStorageService;
-using Store_Shared.Dto;
-using Store_Shared.Models;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text;
 using System.Text.Json;
-using System.Text.Json.Serialization;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.Configuration;
+using Store_Client.Services.LocalStorageService;
+using Store_Shared.Dto;
 
 namespace Store_Client.Services.HttpService
 {
     public class HttpService : IHttpService
     {
-        private HttpClient _httpClient;
-        private NavigationManager _navigationManager;
-        private ILocalStorageService _localStorageService;
         private IConfiguration _configuration;
+        private readonly HttpClient _httpClient;
+        private readonly ILocalStorageService _localStorageService;
+        private readonly NavigationManager _navigationManager;
 
         public HttpService(
             HttpClient httpClient,

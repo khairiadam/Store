@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Store_API.Services.Categories;
 using Store_Shared.Models;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Store_APP.Controllers
 {
@@ -34,11 +34,7 @@ namespace Store_APP.Controllers
         [HttpPost("AddCategory")]
         public async Task<IActionResult> AddCategories([FromForm] Category category, List<IFormFile> image)
         {
-
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
+            if (!ModelState.IsValid) return BadRequest();
 
 
             await _category.Post(category, image);
@@ -55,10 +51,7 @@ namespace Store_APP.Controllers
         [HttpPut("UpdateCategory")]
         public async Task<IActionResult> Edit(string id, [FromForm] Category category, List<IFormFile> image)
         {
-            if (id != category.Id)
-            {
-                return BadRequest();
-            }
+            if (id != category.Id) return BadRequest();
 
             await _category.Put(category, image);
             return Ok(category);

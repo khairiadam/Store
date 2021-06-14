@@ -1,3 +1,4 @@
+using Auth_API.Services.Users;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -7,6 +8,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 using Store_API.Data;
+using Store_API.Services.Auth;
 using Store_API.Services.Categories;
 using Store_APP.Services.Orders;
 using Store_APP.Services.Products;
@@ -34,11 +36,10 @@ namespace Store_APP
             //!! Add DBContext ===>
             services.AddDbContext<AppDbContext>(option =>
                     option.UseSqlServer(Configuration.GetConnectionString("Adam"))
-                    //option.UseSqlServer(Configuration.GetConnectionString("Omar"))
-                    //option.UseSqlServer(Configuration.GetConnectionString("imad"))
-                    //option.UseSqlServer(Configuration.GetConnectionString("Salma"))
-
-                    );
+                //option.UseSqlServer(Configuration.GetConnectionString("Omar"))
+                //option.UseSqlServer(Configuration.GetConnectionString("imad"))
+                //option.UseSqlServer(Configuration.GetConnectionString("Salma"))
+            );
 
 
             ////!! _ DependencyInjection _ ===>
@@ -53,7 +54,7 @@ namespace Store_APP
 
 
             services.AddControllers();
-            services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo { Title = "Store_APP", Version = "v1" }); });
+            services.AddSwaggerGen(c => { c.SwaggerDoc("v1", new OpenApiInfo {Title = "Store_APP", Version = "v1"}); });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

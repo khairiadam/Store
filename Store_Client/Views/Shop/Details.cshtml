@@ -34,7 +34,7 @@
                                         <a href="#">
                                             <img class="card-img img-fluid" src="~/img/product_single_01.jpg" alt="Product Image 1">
                                         </a>
-                                        
+
                                     </div>
 
                                     <div class="col-4">
@@ -125,7 +125,9 @@
                                 <h6>Brand:</h6>
                             </li>
                             <li class="list-inline-item">
-                                <p class="text-muted"><strong>Easy Wear</strong></p>
+                                <p class="text-muted">
+                                    <strong>Easy Wear</strong>
+                                </p>
                             </li>
                         </ul>
 
@@ -136,38 +138,44 @@
                                 <h6> Color :</h6>
                             </li>
                             <li class="list-inline-item">
-                                <p class="text-muted"><strong>@Model.Product.Color</strong></p>
+                                <p class="text-muted">
+                                    <strong>@Model.Product.Color</strong>
+                                </p>
                             </li>
                         </ul>
 
                         <h6>Specification:</h6>
-                       <p>@Model.Product.LongDescription</p>
-                        
+                        <p>@Model.Product.LongDescription</p>
+
                         @foreach (var item in Model.ProductImages)
                         {
-
                             <p>@item.Image</p>
-
-
-
                         }
-                        
-                        
-                        <p><strong>Stock : </strong> @Model.Product.Quantity </p>
+
+
+                        <p>
+                            <strong>Stock : </strong> @Model.Product.Quantity
+                        </p>
 
                         <form action="" method="GET">
                             <input type="hidden" name="product-title" value="Activewear">
                             <div class="row">
-                             
+
                                 <div class="col-auto mx-auto">
                                     <ul class="list-inline pb-3">
                                         <li class="list-inline-item text-right">
                                             Quantity
                                             <input type="hidden" name="product-quanity" id="product-quanity" value="1">
                                         </li>
-                                        <li class="list-inline-item"><span class="btn btn-success" id="btn-minus">-</span></li>
-                                        <li class="list-inline-item"><span class="badge bg-secondary" id="var-value">1</span></li>
-                                        <li class="list-inline-item"><span class="btn btn-success" id="btn-plus">+</span></li>
+                                        <li class="list-inline-item">
+                                            <span class="btn btn-success" id="btn-minus">-</span>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <span class="badge bg-secondary" id="var-value">1</span>
+                                        </li>
+                                        <li class="list-inline-item">
+                                            <span class="btn btn-success" id="btn-plus">+</span>
+                                        </li>
                                     </ul>
                                 </div>
                             </div>
@@ -192,7 +200,7 @@
 
 <div>
     <h4>Product</h4>
-    <hr />
+    <hr/>
     <dl class="row">
         <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Product.Id)
@@ -245,6 +253,6 @@
     </dl>
 </div>
 <div>
-    @Html.ActionLink("Edit", "Edit", new { /* id = Model.PrimaryKey */ }) |
+    @Html.ActionLink("Edit", "Edit", "Shop", new {id = Model.Product.Id}) |
     <a asp-action="Index">Back to List</a>
 </div>

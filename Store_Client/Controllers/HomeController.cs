@@ -1,14 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Diagnostics;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Store_Client.Models;
 using Store_Client.Services.ProductService;
-using Store_Shared.Models;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Net.Http;
-using System.Threading.Tasks;
 
 namespace Store_Client.Controllers
 {
@@ -23,7 +17,7 @@ namespace Store_Client.Controllers
             _product = product;
         }
 
-        public  ActionResult Index()
+        public ActionResult Index()
         {
             return View();
         }
@@ -36,7 +30,7 @@ namespace Store_Client.Controllers
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+            return View(new ErrorViewModel {RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier});
         }
     }
 }

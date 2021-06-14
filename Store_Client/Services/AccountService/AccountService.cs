@@ -1,24 +1,19 @@
-﻿using Microsoft.AspNetCore.Components;
+﻿using System.Collections.Generic;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components;
 using Store_Client.Services.HttpService;
 using Store_Client.Services.LocalStorageService;
 using Store_Shared.Dto;
 using Store_Shared.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Store_Client.Services.AccountService
 {
     public class AccountService : IAccountService
     {
-        private IHttpService _httpService;
-        private NavigationManager _navigationManager;
-        private ILocalStorageService _localStorageService;
-        private string _userKey = "user";
-
-        public ApplicationUser User { get; private set; }
+        private readonly IHttpService _httpService;
+        private readonly ILocalStorageService _localStorageService;
+        private readonly NavigationManager _navigationManager;
+        private readonly string _userKey = "user";
 
         public AccountService(
             IHttpService httpService,
@@ -30,6 +25,8 @@ namespace Store_Client.Services.AccountService
             _navigationManager = navigationManager;
             _localStorageService = localStorageService;
         }
+
+        public ApplicationUser User { get; private set; }
 
         public async Task Initialize()
         {
@@ -88,5 +85,4 @@ namespace Store_Client.Services.AccountService
                 await Logout();
         }
     }
-
 }

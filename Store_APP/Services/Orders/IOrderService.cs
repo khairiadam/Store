@@ -1,6 +1,6 @@
-using Store_Shared.Models;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Store_Shared.Models;
 
 namespace Store_APP.Services.Orders
 {
@@ -11,6 +11,5 @@ namespace Store_APP.Services.Orders
         Task<bool> Post(Order Order);
         Task<bool> Put(Order Order);
         Task<bool> Delete(string id);
-
     }
 }

@@ -1,15 +1,15 @@
+using System.Collections.Generic;
+using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Store_API.Data;
 using Store_Shared.Models;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace Store_APP.Services.Orders
 {
     public class OrderService : IOrderService
     {
-
         private readonly AppDbContext _db;
+
         public OrderService(AppDbContext db)
         {
             _db = db;
@@ -33,7 +33,6 @@ namespace Store_APP.Services.Orders
         public async Task<List<Order>> GetAll()
         {
             return await _db.Orders.ToListAsync();
-
         }
 
         public async Task<bool> Post(Order order)

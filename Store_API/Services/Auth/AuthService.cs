@@ -1,4 +1,11 @@
-﻿using Auth_API.Helpers;
+﻿using System;
+using System.Collections.Generic;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using System.Security.Claims;
+using System.Text;
+using System.Threading.Tasks;
+using Auth_API.Helpers;
 using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -6,25 +13,19 @@ using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Store_Shared.Dto;
 using Store_Shared.Models;
-using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Store_API.Services.Auth
 {
     public class AuthService : IAuthService
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
-        private readonly IMapper _mapper;
         private readonly IOptions<Jwt> _jwt;
+        private readonly IMapper _mapper;
+        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly UserManager<ApplicationUser> _userManager;
 
 
-        public AuthService(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager, IMapper mapper, IOptions<Jwt> jwt)
+        public AuthService(UserManager<ApplicationUser> userManager, RoleManager<IdentityRole> roleManager,
+            IMapper mapper, IOptions<Jwt> jwt)
         {
             _userManager = userManager;
             _roleManager = roleManager;
@@ -33,18 +34,16 @@ namespace Store_API.Services.Auth
         }
 
 
-
-
-        #region  Registration
+        #region Registration
 
         public async Task<AuthModel> RegisterAsync(RegisterModel model)
         {
             //Check For Duplicate Email and Username
             if (await _userManager.FindByEmailAsync(model.Email) is not null)
-                return new AuthModel() { Message = "Email is already Registered" };
+                return new AuthModel {Message = "Email is already Registered"};
 
             if (await _userManager.FindByNameAsync(model.Username) is not null)
-                return new AuthModel() { Message = "Username is already Registered" };
+                return new AuthModel {Message = "Username is already Registered"};
 
 
             ////TODO ==> Fix Mapper !!
@@ -61,13 +60,10 @@ namespace Store_API.Services.Auth
                 var errors = string.Empty;
 
                 //Get Errors Description
-                foreach (var error in result.Errors)
-                {
-                    errors += $"{error.Description}, \n  ";
-                }
+                foreach (var error in result.Errors) errors += $"{error.Description}, \n  ";
 
                 //Return Errors
-                return new AuthModel() { Message = errors };
+                return new AuthModel {Message = errors};
             }
 
             //Add new Users To [User] Role
@@ -80,60 +76,15 @@ namespace Store_API.Services.Auth
                 Email = user.Email,
                 ExpiresOn = jwtSecurityToken.ValidTo,
                 IsAuthenticated = true,
+                UserId = user.Id,
                 //TODO To Change ==>
-                Roles = new List<string> { "Client" },
+                Roles = new List<string> {"Client"},
                 Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
                 Username = user.UserName
             };
         }
 
         #endregion
-
-
-
-
-        #region  Create a Token JWT
-
-        private async Task<JwtSecurityToken> CreateJwtToken(ApplicationUser user)
-        {
-            var userClaims = await _userManager.GetClaimsAsync(user);
-            var roles = await _userManager.GetRolesAsync(user);
-            var roleClaims = new List<Claim>();
-
-            foreach (var role in roles)
-                roleClaims.Add(new Claim("roles", role));
-
-            var claims = new[]
-                {
-                    new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
-                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                    new Claim(JwtRegisteredClaimNames.Email, user.Email),
-                    new Claim("uid", user.Id)
-                }
-                .Union(userClaims)
-                .Union(roleClaims);
-
-            var symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwt.Value.Key));
-            var signingCredentials = new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256);
-
-            var jwtSecurityToken = new JwtSecurityToken
-            (
-                issuer: _jwt.Value.Issuer,
-                audience: _jwt.Value.Audience,
-                claims: claims,
-                expires: DateTime.Now.AddDays(_jwt.Value.DurationInDays
-                ),
-
-                signingCredentials: signingCredentials
-            );
-
-            return jwtSecurityToken;
-        }
-
-
-        #endregion
-
-
 
 
         #region Get Token From Login
@@ -165,10 +116,7 @@ namespace Store_API.Services.Auth
             return authModel;
         }
 
-
         #endregion
-
-
 
 
         #region Add User to Role
@@ -191,10 +139,7 @@ namespace Store_API.Services.Auth
             return result.Succeeded ? string.Empty : "Something Wrong !!";
         }
 
-
         #endregion
-
-
 
 
         #region GetRoles
@@ -220,8 +165,6 @@ namespace Store_API.Services.Auth
         #endregion
 
 
-
-
         #region GetUsers
 
         public async Task<List<object>> GetUsersList()
@@ -230,18 +173,57 @@ namespace Store_API.Services.Auth
 
             var users = await _userManager.Users.ToListAsync();
             users.ForEach(u =>
-           {
-               var user = new
-               {
-                   userId = u.Id,
-                   Username = u.UserName,
-               };
-               usersList.Add(user);
-           });
+            {
+                var user = new
+                {
+                    userId = u.Id,
+                    Username = u.UserName
+                };
+                usersList.Add(user);
+            });
             return usersList;
         }
 
         #endregion
 
+
+        #region Create a Token JWT
+
+        private async Task<JwtSecurityToken> CreateJwtToken(ApplicationUser user)
+        {
+            var userClaims = await _userManager.GetClaimsAsync(user);
+            var roles = await _userManager.GetRolesAsync(user);
+            var roleClaims = new List<Claim>();
+
+            foreach (var role in roles)
+                roleClaims.Add(new Claim("roles", role));
+
+            var claims = new[]
+                {
+                    new Claim(JwtRegisteredClaimNames.Sub, user.UserName),
+                    new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
+                    new Claim(JwtRegisteredClaimNames.Email, user.Email),
+                    new Claim("uid", user.Id)
+                }
+                .Union(userClaims)
+                .Union(roleClaims);
+
+            var symmetricSecurityKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwt.Value.Key));
+            var signingCredentials = new SigningCredentials(symmetricSecurityKey, SecurityAlgorithms.HmacSha256);
+
+            var jwtSecurityToken = new JwtSecurityToken
+            (
+                _jwt.Value.Issuer,
+                _jwt.Value.Audience,
+                claims,
+                expires: DateTime.Now.AddDays(_jwt.Value.DurationInDays
+                ),
+                signingCredentials: signingCredentials
+            );
+
+            return jwtSecurityToken;
+        }
+
+        #endregion
     }
 }

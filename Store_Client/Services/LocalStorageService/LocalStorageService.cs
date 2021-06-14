@@ -1,13 +1,12 @@
-﻿using Microsoft.JSInterop;
-using System.Text.Json;
+﻿using System.Text.Json;
 using System.Threading.Tasks;
+using Microsoft.JSInterop;
 
 namespace Store_Client.Services.LocalStorageService
 {
     public class LocalStorageService : ILocalStorageService
     {
-
-        private IJSRuntime _jsRuntime;
+        private readonly IJSRuntime _jsRuntime;
 
         public LocalStorageService(IJSRuntime jsRuntime)
         {
@@ -33,6 +32,5 @@ namespace Store_Client.Services.LocalStorageService
         {
             await _jsRuntime.InvokeVoidAsync("localStorage.removeItem", key);
         }
-
     }
 }
