@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using Auth_API.Services.Users;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Store_API.Services.Auth;
 using Store_Shared.Dto;
@@ -20,6 +21,7 @@ namespace Store_API.Controllers
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<IActionResult> GetUsers()
         {
             var users = await _userService.GetAll();

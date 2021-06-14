@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Store_API.Services.Categories;
@@ -9,16 +10,17 @@ namespace Store_APP.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryService _category;
-
         public CategoryController(ICategoryService category)
         {
             _category = category;
         }
 
         [HttpGet]
+        [Authorize]
         public async Task<List<Category>> GetCategories()
         {
             return await _category.GetAll();
@@ -32,6 +34,7 @@ namespace Store_APP.Controllers
         }
 
         [HttpPost("AddCategory")]
+       
         public async Task<IActionResult> AddCategories([FromForm] Category category, List<IFormFile> image)
         {
             if (!ModelState.IsValid) return BadRequest();
@@ -42,6 +45,7 @@ namespace Store_APP.Controllers
         }
 
         [HttpDelete("DeleteCategory")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteCategory(string id)
         {
             await _category.Delete(id);
@@ -49,6 +53,7 @@ namespace Store_APP.Controllers
         }
 
         [HttpPut("UpdateCategory")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(string id, [FromForm] Category category, List<IFormFile> image)
         {
             if (id != category.Id) return BadRequest();
