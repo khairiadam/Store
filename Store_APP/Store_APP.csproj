@@ -14,4 +14,9 @@
     <ProjectReference Include="..\Store_Shared\Store_Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Controllers" />
+    <Folder Include="Services" />
+  </ItemGroup>
+
 </Project>

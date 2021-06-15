@@ -18,11 +18,11 @@ namespace Store_Shared.Models
         public int Quantity { get; set; }
         public string Color { get; set; }
         public double Price { get; set; }
-        public Category ProductCategory { get; set; }
+
+        [JsonIgnore] public Category ProductCategory { get; set; }
         public string ProductCategoryId { get; set; }
 
-        [NotMapped]
-        public List<byte[]> ImagesArray { get; set; }
+        // [NotMapped] public List<byte[]> ImagesArray { get; set; }
 
         [JsonIgnore] public List<Images> ProductImages { get; set; }
     }

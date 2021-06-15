@@ -14,6 +14,9 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using Store_API.Data;
 using Store_API.Services.Auth;
+using Store_API.Services.Categories;
+using Store_APP.Services.Orders;
+using Store_APP.Services.Products;
 using Store_Shared.Models;
 
 //using Store_API.Services.Categories;
@@ -53,6 +56,10 @@ namespace Store_API
             //!! _ DependencyInjection _ ===>
             services.AddScoped<IAuthService, AuthService>();
             services.AddScoped<IUserService, UserService>();
+
+            services.AddScoped<IProductService, ProductService>();
+            services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<IOrderService, OrderService>();
 
 
             services.AddAutoMapper(Assembly.GetExecutingAssembly());

@@ -50,14 +50,23 @@ namespace Store_API.Services.Categories
 
         public async Task<Category> Post(Category category, List<IFormFile> image)
         {
-            foreach (var file in image)
+            if (image.Count > 0)
             {
-                MemoryStream ms = new();
-                await file.CopyToAsync(ms);
-                category.Image = ms.ToArray();
+                foreach (var file in image)
+                {
+                    MemoryStream ms = new();
+                    await file.CopyToAsync(ms);
+                    category.Image = ms.ToArray();
+                    _db.Categories.Add(category);
+                    await _db.SaveChangesAsync();
+                }
+            }
+            else
+            {
                 _db.Categories.Add(category);
                 await _db.SaveChangesAsync();
             }
+
             //MemoryStream ms = new();
             //await image.CopyToAsync(ms);
             //category.Image = ms.ToArray();

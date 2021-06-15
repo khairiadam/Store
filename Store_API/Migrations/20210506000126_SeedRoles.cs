@@ -12,7 +12,7 @@ namespace Store_API.Migrations
                 columns: new[] { "Id", "Name", "NormalizedName", "ConcurrencyStamp" },
                 values: new object[] { Guid.NewGuid().ToString(), "Client", "Client".ToUpper(), Guid.NewGuid().ToString() }
             );
-
+            
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "Name", "NormalizedName", "ConcurrencyStamp" },
@@ -23,7 +23,7 @@ namespace Store_API.Migrations
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.Sql("Delete From [AspNetRoles]");
+            // migrationBuilder.Sql("Delete From [AspNetRoles]");
         }
     }
 }

@@ -15,6 +15,8 @@ namespace Store_API.Data
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Category> Categories { get; set; }
         public virtual DbSet<Order> Orders { get; set; }
+        
+        public virtual DbSet<OrderProducts> OrderProducts { get; set; }
         public virtual DbSet<Images> Images { get; set; }
     }
 }
