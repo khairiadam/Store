@@ -6,39 +6,8 @@
     <projectFile>Store_Client/Store_Client.csproj</projectFile>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="78a0fb29-374d-4bfb-8ae6-7b7ab40b6ae4" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Store_API.IntegrationTest/Store_API.IntegrationTest.csproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Store_API.IntegrationTest/UnitTest1.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Store_API.Test/CategoriesControllerTests.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Store_API.Test/IntegrationTest.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Store_API.Test/ProductControllerTests.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Store_API.Test/Store_API.Test.csproj" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Store_API/Services/OrderProductsServices/OrderProductsService.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Store_Test/TestClientProvider.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store.sln" beforeDir="false" afterPath="$PROJECT_DIR$/Store.sln" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store_API/Controllers/CategoryController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store_API/Controllers/CategoryController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store_API/Controllers/OrderController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store_API/Controllers/OrderController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store_API/Controllers/ProductController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store_API/Controllers/ProductController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store_API/Controllers/UsersController.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store_API/Controllers/UsersController.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store_API/Services/OrderProductsServices/OrderProductsServices.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store_API/Services/Orders/IOrderService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store_API/Services/Orders/IOrderService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store_API/Services/Orders/OrderService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store_API/Services/Orders/OrderService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store_API/Services/Products/IProductService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store_API/Services/Products/IProductService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store_API/Services/Products/ProductService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store_API/Services/Products/ProductService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store_API/Services/Users/IUserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store_API/Services/Users/IUserService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store_API/Services/Users/UserService.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store_API/Services/Users/UserService.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store_API/Startup.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store_API/Startup.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store_APP/Controllers/OrderController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store_APP/Controllers/ProductController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store_APP/Controllers/WeatherForecastController.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store_APP/Program.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store_APP/Properties/launchSettings.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store_APP/Startup.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store_APP/Store_APP.csproj" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store_APP/WeatherForecast.cs" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store_APP/appsettings.Development.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store_APP/appsettings.json" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Store_Shared/Models/Status.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Store_Shared/Models/Status.cs" afterDir="false" />
+    <list default="true" id="78a0fb29-374d-4bfb-8ae6-7b7ab40b6ae4" name="Default Changelist" comment="Add Testing">
+      <change afterPath="$PROJECT_DIR$/.github/workflows/dotnet-core.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -63,11 +32,8 @@
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/377B61B6-13EA-444F-826F-377D9474FFCA/46/af0c849f/ExecutionTimer.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Store_API/Startup.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$PROJECT_DIR$/Store_Client/obj/Debug/net5.0/Razor/Views/Shop/Edit.cshtml.g.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Store_Test/UnitTest1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/2E9BEEB1-8083-4F4B-9ABE-A5F3DB1BC8BD/2C2/AsyncTaskMethodBuilderT.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Store_API.IntegrationTest/UnitTest1.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2E9BEEB1-8083-4F4B-9ABE-A5F3DB1BC8BD/c0/74fb5681/RuntimeType.cs" root0="SKIP_HIGHLIGHTING" />
-    <setting file="file://$PROJECT_DIR$/Store_Test/TestClientProvider.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/F758DD2F-9E4C-41A0-B7A1-63138D66F75D/e3/a727f12d/ServiceProvider.cs" root0="SKIP_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/2E9BEEB1-8083-4F4B-9ABE-A5F3DB1BC8BD/8a/e70b53fe/Activator.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
@@ -240,7 +206,7 @@
       <workItem from="1623716579317" duration="827000" />
       <workItem from="1623744325220" duration="9527000" />
       <workItem from="1624025042150" duration="7772000" />
-      <workItem from="1624118180722" duration="11594000" />
+      <workItem from="1624118180722" duration="12126000" />
     </task>
     <task id="LOCAL-00001" summary="save changes">
       <created>1623702614505</created>
@@ -263,7 +229,14 @@
       <option name="project" value="LOCAL" />
       <updated>1623717055921</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Add Testing">
+      <created>1624141060704</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1624141060704</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -289,7 +262,8 @@
     <MESSAGE value="save changes" />
     <MESSAGE value="review CategoryController.cs" />
     <MESSAGE value="Order Optimization" />
-    <option name="LAST_COMMIT_MESSAGE" value="Order Optimization" />
+    <MESSAGE value="Add Testing" />
+    <option name="LAST_COMMIT_MESSAGE" value="Add Testing" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
