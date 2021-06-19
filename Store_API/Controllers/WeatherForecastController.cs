@@ -4,7 +4,7 @@ using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-namespace Store_APP.Controllers
+namespace Store_API.Controllers
 {
     [ApiController]
     [Route("[controller]")]

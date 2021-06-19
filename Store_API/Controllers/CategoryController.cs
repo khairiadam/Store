@@ -26,7 +26,7 @@ namespace Store_API.Controllers
         }
 
         [HttpGet("GetCategory")]
-        [Authorize(Roles = "Admin")]
+        // [Authorize(Roles = "Admin")]
         public async Task<Category> GetCategory(string id)
         {
             var cat = await _category.Get(id);
@@ -34,7 +34,7 @@ namespace Store_API.Controllers
         }
 
         [HttpPost("AddCategory")]
-        // [Authorize(Roles = "Admin")]
+        [Authorize(Roles = "Client")]
         public async Task<IActionResult> AddCategories([FromForm] Category category, List<IFormFile> image)
         {
             if (!ModelState.IsValid) return BadRequest();

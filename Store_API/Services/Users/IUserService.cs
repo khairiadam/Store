@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Store_Shared.Dto;
 
-namespace Auth_API.Services.Users
+namespace Store_API.Services.Users
 {
     public interface IUserService
     {

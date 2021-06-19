@@ -10,7 +10,7 @@ using Store_Shared.Dto;
 using Store_Shared.Models;
 using StoreBlzr.Server.Help;
 
-namespace Auth_API.Services.Users
+namespace Store_API.Services.Users
 {
     public class UserService : IUserService
     {

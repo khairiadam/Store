@@ -3,7 +3,9 @@
     public enum Status
     {
         Pending,
+        NotPaid,
         Paid,
+        Shipped,
         Delivered
     }
 }

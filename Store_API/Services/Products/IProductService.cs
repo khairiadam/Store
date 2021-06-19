@@ -4,13 +4,13 @@ using Microsoft.AspNetCore.Http;
 using Store_Shared.Dto;
 using Store_Shared.Models;
 
-namespace Store_APP.Services.Products
+namespace Store_API.Services.Products
 {
     public interface IProductService
     {
         Task<IEnumerable<ProductModel>> GetAll();
         Task<ProductModel> Get(string Id);
-        Task<IEnumerable<ProductModel>> GetByCategory(string CategoryId);
+        Task<IEnumerable<ProductModel>> GetByCategory(string categoryId);
         Task<Product> Post(Product model, List<IFormFile> image);
         Task Delete(string Id);
         Task Update(Product model);

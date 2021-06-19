@@ -1,18 +1,27 @@
+using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
+using AutoMapper.Internal;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Store_API.Data;
 using Store_Shared.Models;
 
-namespace Store_APP.Services.Orders
+namespace Store_API.Services.Orders
 {
     public class OrderService : IOrderService
     {
         private readonly AppDbContext _db;
+        private readonly UserManager<ApplicationUser> _userManager;
+        //private readonly HttpContext _context;
 
-        public OrderService(AppDbContext db)
+        public OrderService(AppDbContext db, UserManager<ApplicationUser> userManager)
         {
             _db = db;
+            //_context = context;
+            _userManager = userManager;
         }
 
         public async Task<bool> Delete(string id)
@@ -23,6 +32,30 @@ namespace Store_APP.Services.Orders
             await _db.SaveChangesAsync();
             return true;
         }
+
+        public async Task<Order> GetOrderByUserId(string userId)
+        {
+            var userOrders = _db.Orders
+                .OrderByDescending(o => o.CreationDate)
+                .Where(o => o.UserId == userId) as IEnumerable<Order>;
+            return userOrders.FirstOrDefault(o => o.OrderStatus == Status.Pending);
+        }
+
+        public async Task ConfirmOrder(Order order)
+        {
+            order.OrderStatus = Status.Paid;
+            try
+            {
+                _db.Update(order);
+                await _db.SaveChangesAsync();
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                throw;
+            }
+        }
+
 
         public async Task<Order> Get(string id)
         {
@@ -38,9 +71,19 @@ namespace Store_APP.Services.Orders
         public async Task<bool> Post(Order order)
         {
             if (order == null) return false;
-            _db.Orders.Add(order);
-            await _db.SaveChangesAsync();
-            return true;
+            try
+            {
+                //var user = await _userManager.GetUserAsync(_context.User);
+                //order.UserId = user.Id;
+                _db.Orders.Add(order);
+                await _db.SaveChangesAsync();
+                return true;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.Message);
+                return false;
+            }
         }
 
         public async Task<bool> Put(Order order)

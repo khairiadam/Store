@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
-using Auth_API.Services.Users;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Store_API.Services.Auth;
+using Store_API.Services.Users;
 using Store_Shared.Dto;
 
 namespace Store_API.Controllers
@@ -46,6 +46,7 @@ namespace Store_API.Controllers
 
 
         [HttpPost("Add")]
+        [Authorize]
         public async Task<IActionResult> AddUser([FromBody] RegisterModel model)
         {
             if (!ModelState.IsValid) return BadRequest(ModelState);
@@ -64,6 +65,7 @@ namespace Store_API.Controllers
 
 
         [HttpPut("Edit")]
+        [Authorize]
         public async Task<IActionResult> EditUser(string userId, EditUserModel user)
         {
             if (!ModelState.IsValid || userId != user.Id) return BadRequest(ModelState);
@@ -77,6 +79,7 @@ namespace Store_API.Controllers
 
 
         [HttpDelete("Delete")]
+        [Authorize]
         public async Task<IActionResult> DeleteUser(string id)
         {
             if (!await _userService.Delete(id)) return BadRequest(new {Message = "Couldn't Delete User !"});
@@ -88,6 +91,7 @@ namespace Store_API.Controllers
         #region Get UserList and RoleList
 
         [HttpGet("Roles")]
+        [Authorize]
         public async Task<IActionResult> UsersAndRolesAsync()
         {
             var roleList = await _userService.GetRolesList();
@@ -104,6 +108,7 @@ namespace Store_API.Controllers
         #region Add User To Role Method
 
         [HttpPost("ManageRole")]
+        [Authorize]
         public async Task<IActionResult> AddToRoleAsync([FromBody] AddRoleModel model)
         {
             //Check the Model State(Annotaions)

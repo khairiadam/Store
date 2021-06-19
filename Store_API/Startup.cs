@@ -1,7 +1,6 @@
 using System.Reflection;
 using System.Text;
 using Auth_API.Helpers;
-using Auth_API.Services.Users;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -15,8 +14,10 @@ using Microsoft.OpenApi.Models;
 using Store_API.Data;
 using Store_API.Services.Auth;
 using Store_API.Services.Categories;
-using Store_APP.Services.Orders;
-using Store_APP.Services.Products;
+using Store_API.Services.OrderProductsServices;
+using Store_API.Services.Orders;
+using Store_API.Services.Products;
+using Store_API.Services.Users;
 using Store_Shared.Models;
 
 //using Store_API.Services.Categories;
@@ -60,11 +61,11 @@ namespace Store_API
             services.AddScoped<IProductService, ProductService>();
             services.AddScoped<ICategoryService, CategoryService>();
             services.AddScoped<IOrderService, OrderService>();
+            services.AddScoped<IOrderProductsService, OrderProductsService>();
 
 
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             //services.AddAutoMapper(typeof(Startup));
-
 
             services.AddAuthentication(options =>
                 {
@@ -88,6 +89,7 @@ namespace Store_API
                         IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Jwt:Key"]))
                     };
                 });
+            services.AddHttpContextAccessor();
 
 
             services.AddControllers();

@@ -8,7 +8,7 @@ using Store_API.Data;
 using Store_Shared.Dto;
 using Store_Shared.Models;
 
-namespace Store_APP.Services.Products
+namespace Store_API.Services.Products
 {
     public class ProductService : IProductService
     {

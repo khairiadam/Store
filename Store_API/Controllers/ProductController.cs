@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Store_APP.Services.Products;
+using Store_API.Services.Products;
 using Store_Shared.Models;
 
 
@@ -55,6 +56,7 @@ namespace Store_API.Controllers
 
 
         [HttpPost("Post")]
+        
         public async Task<IActionResult> Post([FromForm] Product model, List<IFormFile> image)
         {
             if (!ModelState.IsValid) return BadRequest("something went wrong");
